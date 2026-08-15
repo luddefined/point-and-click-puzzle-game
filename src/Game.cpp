@@ -61,6 +61,10 @@ bool Game::init()
 	sound_manager.addSound("door", "../Data/Audio/door.wav");
 	sound_manager.addSound("switch", "../Data/Audio/Switch.wav");
 
+	sound_manager["merge"]->setVolume(50.f);
+	sound_manager["switch"]->setVolume(50.f);
+	sound_manager["door"]->setVolume(50.f);
+	
 	return true;
 }
 
@@ -72,7 +76,6 @@ void Game::update(float dt)
 	if (current_room->room_completed)
 	{
 		// Increment room index and change the room
-		std::cout << "Room completed\n";
 		if (++current_room_index < 3)
 		{
 			delete current_room;

@@ -7,6 +7,7 @@
 #include <vector>
 #include <random>
 #include "string"
+#include <memory>
 
 using string = std::string;
 
@@ -22,6 +23,7 @@ class SoundManager
     void addSound(string name, string path);
     void play(string name, float pitch = BASE_PITCH);
     void dispose();
+    sf::Sound* operator[](string item);
 
     // Geta a randomised pitch value to use.
     inline float getRandomPitch(float base, float range)
@@ -35,7 +37,7 @@ class SoundManager
 
 
 private:
-    std::vector<sf::SoundBuffer> buffers;
+    std::vector<std::unique_ptr<sf::SoundBuffer>> buffers;
     std::unordered_map<string, sf::Sound> sounds;
     
 };

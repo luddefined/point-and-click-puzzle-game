@@ -11,7 +11,7 @@ struct SpriteData
 {
 public:
 	SpriteData() { };
-	~SpriteData() { std::cout << "Deleting\n"; }
+	~SpriteData() { }
 
 	sf::Texture texture;								// Texture for the sprite
 	bool texture_loaded = false;						// Whether texture has loaded

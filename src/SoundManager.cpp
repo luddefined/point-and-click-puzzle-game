@@ -14,16 +14,11 @@ SoundManager::~SoundManager()
 
 void SoundManager::addSound(string name, string path)
 {
-    sf::SoundBuffer buffer;
-    if (!buffer.loadFromFile(path))
-    {
-        return;
-    }
-    sf::Sound sound;
-    sound.setBuffer(buffer);
+    auto* buffer = new sf::SoundBuffer;
+    if (!buffer->loadFromFile(path)) return;
     
     buffers.emplace_back(buffer);
-    sounds.emplace(name, sound);
+    sounds.emplace(name, sf::Sound(*buffer));
 }
 
 void SoundManager::play(string name, float pitch)
@@ -41,3 +36,8 @@ void SoundManager::dispose()
     buffers.clear();
 }
 
+// Get a sound loaded from the manager.
+sf::Sound* SoundManager::operator[](string item)
+{
+    return &sounds[item];
+}
